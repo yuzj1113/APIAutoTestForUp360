@@ -1,8 +1,8 @@
-# AppiumUp360×Ô¶¯»¯²âÊÔ¿ò¼Ü
-## ÏîÄ¿Ãû¼°¼ò½é:
-´ËÏîÄ¿ÊÇ»ùÓÚmock¡¢Django·â×°¶ø³ÉµÄ½Ó¿ÚAPI×Ô¶¯»¯²âÊÔ¿ò¼Ü
+# AppiumUp360è‡ªåŠ¨åŒ–æµ‹è¯•æ¡†æž¶
+## é¡¹ç›®ååŠç®€ä»‹:
+æ­¤é¡¹ç›®æ˜¯åŸºäºŽmockã€unittestå°è£…è€Œæˆçš„PythonæŽ¥å£APIè‡ªåŠ¨åŒ–æµ‹è¯•æ¡†æž¶
 
-## ¸Ã¿ò¼ÜËùÐèpython²å¼þ:
+## è¯¥æ¡†æž¶æ‰€éœ€pythonæ’ä»¶:
 * HTMLTestRunner
 * mock
 * email
@@ -11,10 +11,10 @@
 * mysqlclient-1.4.2.post1-cp36-cp36m-win_amd64.whl
 * xlrd
 
-## ¿ò¼Ü½éÉÜ:
+## æ¡†æž¶ä»‹ç»:
 
 
-## ÃüÁîÔËÐÐ:
+## å‘½ä»¤è¿è¡Œ:
 
 
-## ÅäÖÃÎÄ¼þËµÃ÷:
+## é…ç½®æ–‡ä»¶è¯´æ˜Ž:
