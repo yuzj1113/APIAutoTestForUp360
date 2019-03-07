@@ -9,7 +9,7 @@ class OperationExcel:
             self.file_name = file_name
             self.sheet_id = sheet_id
         else:
-            self.file_name = '/config/test_case.xls'
+            self.file_name = 'config/test_case.xls'
             self.sheet_id = 0
         self.data = self.get_data()
 
@@ -71,6 +71,5 @@ class OperationExcel:
 
 
 if __name__ == '__main__':
-    opers = OperationExcel(0,'../config/test_case.xls')
-    print(opers.data)
-    print(opers.get_cell_value(1, 3))
+    opers = OperationExcel(1,'../config/test_case.xls')
+    print(opers.get_row_num('up360-01'))

@@ -18,7 +18,7 @@ class ParameTestCase(unittest.TestCase):
         self.data = GetData()
         self.com_util = CommonUtil()
         self.send_mai = SendEmail()
-
+        self.operation = OperetionJson()
 
 class ApiTestCase(ParameTestCase):
     # 程序执行的
@@ -43,7 +43,10 @@ class ApiTestCase(ParameTestCase):
                     depend_response_data = self.depend_data.get_data_for_key(i)
                     # 获取依赖的key
                     depend_key = self.data.get_depend_field(i)
-                    request_data[depend_key] = depend_response_data
+                    #print(request_data)
+                    #request_data[depend_key] = depend_response_data
+                    request_data = self.operation.deal_data(request_data, depend_key, depend_response_data)
+
 
                 if header == 'write':
                     res = self.run_method.run_main(method, url, request_data)
@@ -58,8 +61,8 @@ class ApiTestCase(ParameTestCase):
                     }
                     res = self.run_method.run_main(method, url, request_data, cookies)
                 else:
-                    res = self.run_method.run_main(method, url, request_data,
-                                                   {'Content-Type': 'application/x-www-form-urlencoded'})
+                    res = self.run_method.run_main(method, url, request_data,{'Content-Type': 'application/x-www-form-urlencoded'})
+
 
                 if self.com_util.is_equal_dict(expect, res):
                     self.data.write_result(i, 'pass')
@@ -68,5 +71,5 @@ class ApiTestCase(ParameTestCase):
                     self.data.write_result(i, res)
                     fail_count.append(i)
 
-            self.send_mai.send_email(pass_count, fail_count)
+        self.send_mai.send_email(pass_count, fail_count)
 

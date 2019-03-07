@@ -1,11 +1,12 @@
 # coding:utf-8
 import json
-
+from urllib import parse
+from urllib import request
 
 class OperetionJson:
     def __init__(self, file_path=None):
         if file_path == None:
-            self.file_path = '../config/user.json'
+            self.file_path = 'config/user.json'
         else:
             self.file_path = file_path
         self.data = self.read_data()
@@ -25,7 +26,24 @@ class OperetionJson:
         with open('../config/cookie.json', 'w') as fp:
             fp.write(json.dumps(data))
 
+    def deal_data(self, data, key, value):
+        data = data[7:]
+        request_data = parse.unquote(data)
+        request_data = json.loads(request_data)
+        if '.' in key:
+            list = key.split('.')
+            request_data[list[0]][list[1]] = value
+        else:
+            request_data[key] = value
+
+        request_data = json.dumps(request_data)
+        request_data = parse.quote(request_data)
+        request_data = 'moJson=' + request_data
+        return request_data
+
 
 if __name__ == '__main__':
     opjson = OperetionJson()
-    print(opjson.get_data('shop'))
+    data = "moJson=%7B%22appId%22%3A%223286435%22%2C%22manufacturer%22%3A%22vivo%22%2C%22model%22%3A%22vivo+Y83A%22%2C%22params%22%3A%7B%22userId%22%3A%22123456%22%7D%2C%22random%22%3A15969%2C%22sessionKey%22%3A%224ab63e6d489584586890c2937b6d8219%3B00000000-4ed1-486d-ffff-ffff9b73f65c%3B9908685%22%2C%22sysType%22%3A%223%22%2C%22sysVersion%22%3A%228.1.0%22%2C%22version%22%3A%224.1.2%22%7D"
+    request_data = opjson.deal_data(data, 'userId', '654321')
+    print(request_data)
