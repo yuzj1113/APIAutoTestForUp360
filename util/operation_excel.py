@@ -15,9 +15,13 @@ class OperationExcel:
 
     # 获取sheets的内容
     def get_data(self):
-        data = xlrd.open_workbook(self.file_name)
-        tables = data.sheets()[self.sheet_id]
-        return tables
+        try:
+            data = xlrd.open_workbook(self.file_name)
+            tables = data.sheets()[self.sheet_id]
+            return tables
+        except Exception as e:
+            print("出错了，错误信息是：", e)
+            return False
 
     # 获取单元格的行数
     def get_lines(self):
@@ -34,7 +38,7 @@ class OperationExcel:
         写入excel数据
         row,col,value
         '''
-        read_data = xlrd.open_workbook(self.file_name)
+        read_data = xlrd.open_workbook(self.file_name,formatting_info=True)
         write_data = copy(read_data)
         sheet_data = write_data.get_sheet(self.sheet_id)
         sheet_data.write(row, col, value)
@@ -71,5 +75,5 @@ class OperationExcel:
 
 
 if __name__ == '__main__':
-    opers = OperationExcel(1,'../config/test_case.xls')
+    opers = OperationExcel(1, '../config/test_case.xls')
     print(opers.get_row_num('up360-01'))

@@ -3,13 +3,13 @@ import unittest
 import json
 import HTMLTestRunner
 from mock import mock
-from base.demo import RunMain
+from base.runmethod import RunMethod
 from base.mock_demo import mock_test
 
 
 class TestMethod(unittest.TestCase):
     def setUp(self):
-        self.run = RunMain()
+        self.run = RunMethod()
 
     def test_03(self):
         url = 'http://coding.imooc.com/api/cate'
