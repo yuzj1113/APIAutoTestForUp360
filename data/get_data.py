@@ -4,11 +4,14 @@ from data import data_config
 from util.operation_json import OperetionJson
 from util.connect_db import OperationMysql
 from util.common_util import CommonUtil
+from data.expect_func import ExpectFunc
+
 
 class GetData:
     def __init__(self):
         self.opera_excel = OperationExcel(1, 'config/test_case.xls')
         self.common_util = CommonUtil()
+        self.expectFunc = ExpectFunc()
 
     # 去获取excel行数,就是我们的case个数
     def get_case_lines(self):
@@ -72,7 +75,7 @@ class GetData:
     def get_expcet_data_for_mysql(self, row):
         op_mysql = OperationMysql()
         sql = self.get_expcet_data(row)
-        res = op_mysql.search_one(sql)
+        res = op_mysql.search_all(sql)
         return res.decode('unicode-escape')
 
     # 获取预期结果
@@ -83,8 +86,11 @@ class GetData:
             expect = None
         elif not self.common_util.is_json(expect):
             op_mysql = OperationMysql()
-            expect = op_mysql.search_one(expect)
+            expect = op_mysql.search_all(expect)
 
+            col = int(data_config.get_data_func())
+            func = self.opera_excel.get_cell_value(row, col)
+            expect = getattr(self.expectFunc, func)(expect)
         return expect
 
     def write_result(self, row, value):
@@ -117,3 +123,18 @@ class GetData:
             return None
         else:
             return data
+
+    # 获取数据依赖字段
+    def get_expect_func(self, row):
+        col = int(data_config.get_data_func())
+        data = self.opera_excel.get_cell_value(row, col)
+        if data == "":
+            return None
+        else:
+            return data
+
+
+if __name__ == '__main__':
+    op_mysql = GetData()
+    res = op_mysql.get_expcet_data(13)
+    print(res)

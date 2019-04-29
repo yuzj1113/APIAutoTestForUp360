@@ -13,6 +13,7 @@ class global_var:
     data = '9'
     expect = '10'
     result = '11'
+    data_func = '12'
 
 
 # 获取caseid
@@ -63,3 +64,7 @@ def get_result():
 
 def get_header_value():
     return global_var.header
+
+
+def get_data_func():
+    return global_var.data_func

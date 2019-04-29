@@ -3,6 +3,7 @@ import sys
 import json
 
 sys.path.append('D:/Python/workspace/APIAutoTestForUp360/')
+import random
 from util.operation_excel import OperationExcel
 from base.runmethod import RunMethod
 from data.get_data import GetData
@@ -29,9 +30,7 @@ class DependdentData:
         # header = self.data.is_header(row_num)
         method = self.data.get_request_method(row_num)
         url = self.data.get_request_url(row_num)
-        print(request_data)
-        res = run_method.run_main(method, url, request_data,
-                                                   {'Content-Type': 'application/x-www-form-urlencoded'})
+        res = run_method.run_main(method, url, request_data, {'Content-Type': 'application/x-www-form-urlencoded'})
         return json.loads(res)
 
     # 根据依赖的key去获取执行依赖测试case的响应,然后返回
@@ -58,4 +57,4 @@ if __name__ == '__main__':
     res = "data.userId"
     json_exe = parse(res)
     id = [match.value for match in json_exe.find(order)][0]
-    print()
+    print(id)

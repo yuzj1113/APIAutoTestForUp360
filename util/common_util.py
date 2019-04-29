@@ -30,8 +30,10 @@ class CommonUtil:
         '''
         if isinstance(dict_one, str):
             dict_one = json.loads(dict_one)
+            print(dict_two)
         if isinstance(dict_two, str):
             dict_two = json.loads(dict_two)
+            print(dict_two)
         return operator.eq(dict_one, dict_two)
 
     def is_json(self, data):

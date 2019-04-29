@@ -61,7 +61,7 @@ class ApiTestCase(ParameTestCase):
                     }
                     res = self.run_method.run_main(method, url, request_data, cookies)
                 else:
-                    res = self.run_method.run_main(method, url, request_data,{'Content-Type': 'application/x-www-form-urlencoded'})
+                    res = self.run_method.run_main(method, url, request_data, {'Content-Type': 'application/x-www-form-urlencoded'})
 
 
                 if self.com_util.is_equal_dict(expect, res):
